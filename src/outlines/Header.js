@@ -6,9 +6,8 @@ import { getCommonStates } from '../commons/contexts/CommonContext';
 import { getUserContext } from '@/commons/contexts/UserInfoContext';
 const HeaderBox = styled.header`
   .site-top {
-    background: #f8f8f8;
-    border-bottom: 1px solid #d5d5d5;
-    height: 35px;
+    background: ${({ theme }) => theme.colors.white};
+    height: 65px;
 
     div {
       text-align: right;
@@ -21,39 +20,6 @@ const HeaderBox = styled.header`
 
         &.on {
           color: ${({ theme }) => theme.colors.primary};
-        }
-      }
-    }
-  }
-
-  .logo-search {
-    div {
-      display: flex;
-      justify-content: space-between;
-      height: 150px;
-      align-items: center;
-
-      form {
-        display: flex;
-        height: 45px;
-        width: 380px;
-
-        button {
-          width: 45px;
-          background: ${({ theme }) => theme.colors.dark};
-          border: 0;
-          cursor: pointer;
-
-          svg {
-            color: ${({ theme }) => theme.colors.gray};
-            font-size: 1.75rem;
-          }
-        }
-
-        input[type='text'] {
-          flex-grow: 1;
-          border: 5px solid ${({ theme }) => theme.colors.dark};
-          padding: 0 10px;
         }
       }
     }

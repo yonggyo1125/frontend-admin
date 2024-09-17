@@ -1,38 +1,53 @@
 'use client';
 import React from 'react';
 import { getCommonStates } from '@/commons/contexts/CommonContext';
-import styled, { css } from 'styled-components';
+import { getUserStates } from '@/commons/contexts/UserInfoContext';
+import styled from 'styled-components';
+import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 
-const Menus = styled.nav`
-  background: ${({ theme }) => theme.colors.black};
-  .inner {
-    display: flex;
-    height: 45px;
-    a {
-      line-height: 45px;
-      fontsize: ${({ theme }) => theme.fontSizes.mediumLarge}px;
+const Menus = styled.aside`
+  background: ${({ theme }) => theme.colors.gray};
+
+  a {
+      display: block;
+      background: ${({ theme }) => theme.colors.primary};
+      line-height: 60px;
+      font-size: ${({ theme }) => theme.fontSizes.mediumLarge}px;
       color: ${({ theme }) => theme.colors.white};
-      padding: 0 35px;
+      padding: 0 20px;
+      display: block;
     }
-    a.on,
-    a:hover {
-      background: ${({ theme }) => theme.colors.gray};
+    a + a { 
+        border-top: 1px solid ${({ theme }) => theme.colors.gray};
+    }
+    a.on {
+      background: ${({ theme }) => theme.colors.black};
     }
   }
 `;
 
 const MainMenu = () => {
-  const { showMainMenu } = getCommonStates();
+  const { showMainMenu, menuCode } = getCommonStates();
+  const { isAdmin } = getUserStates();
   const { t } = useTranslation();
 
   return (
-    showMainMenu && (
+    showMainMenu &&
+    isAdmin && (
       <Menus>
-        <div className="layout-width inner">
-          <a href="#">{t('메뉴1')}</a>
-          <a href="#">{t('메뉴2')}</a>
-        </div>
+        <a
+          href="/member/list"
+          className={classNames({ on: menuCode === 'member' })}
+        >
+          {t('회원관리')}
+        </a>
+        <a
+          href="/board/list"
+          className={classNames({ on: menuCode === 'board' })}
+        >
+          {t('게시판목록')}
+        </a>
       </Menus>
     )
   );
