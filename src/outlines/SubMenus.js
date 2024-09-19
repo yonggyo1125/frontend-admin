@@ -54,6 +54,16 @@ function getSubMenus(menuCode) {
         { code: 'register', name: '게시판 등록', url: '/board/register' },
         { code: 'posts', name: '게시글 관리', url: '/board/posts' },
       ];
+    case 'counseling': // 상담 관리
+      return [
+        { code: 'apply', name: '상담 접수 목록', url: '/counseling' },
+        { code: 'group', name: '집단 상담 프로그램', url: '/counseling/group' },
+        {
+          code: 'group_register',
+          name: '집단 상담 프로그램 등록',
+          url: '/counseling/group/register',
+        },
+      ];
     default:
       return [];
   }

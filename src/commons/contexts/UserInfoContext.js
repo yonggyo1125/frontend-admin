@@ -28,7 +28,7 @@ const UserInfoProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
   const [isCounselor, setIsCounselor] = useState(false);
   const [isProfessor, setIsProfessor] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
 
   const value = {
     states: { userInfo, isLogin, isAdmin, isCounselor, isProfessor },
