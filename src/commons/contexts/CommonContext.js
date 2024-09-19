@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { createContext, useState, useContext } from 'react';
 
 const CommonContext = createContext({
@@ -20,7 +21,15 @@ const CommonProvider = ({ children }) => {
   const [showMainMenu, setShowMainMenu] = useState(true);
 
   const value = {
-    states: { mainTitle, subTitle, menuCode, subMenuCode, showHeader, showFooter, showMainMenu },
+    states: {
+      mainTitle,
+      subTitle,
+      menuCode,
+      subMenuCode,
+      showHeader,
+      showFooter,
+      showMainMenu,
+    },
     actions: {
       setMainTitle,
       setSubTitle,

@@ -1,16 +1,15 @@
 'use client';
 import React, { useLayoutEffect, useState, useCallback } from 'react';
 import cookies from 'react-cookies';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { getCommonActions } from '@/commons/contexts/CommonContext';
 import LoginForm from '../components/LoginForm';
 import { StyledWrapper } from '@/commons/components/layouts/StyledWrapper';
 import { apiLogin } from '../apis/apiLogin';
 import { getUserActions } from '@/commons/contexts/UserInfoContext';
-const LoginContainer = () => {
+const LoginContainer = ({ searchParams }) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { t } = useTranslation();
   const { setMainTitle } = getCommonActions();
   useLayoutEffect(() => {
@@ -20,7 +19,13 @@ const LoginContainer = () => {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
 
-  const { setIsLogin, setIsAdmin, setUserInfo, setIsCounselor, setIsProfessor } = getUserActions();
+  const {
+    setIsLogin,
+    setIsAdmin,
+    setUserInfo,
+    setIsCounselor,
+    setIsProfessor,
+  } = getUserActions();
 
   const onSubmit = useCallback(
     (e) => {
@@ -86,7 +91,17 @@ const LoginContainer = () => {
           setErrors({ ..._errors });
         });
     },
-    [form, router, searchParams, setIsAdmin, setIsLogin, setUserInfo, setIsCounselor, setIsProfessor, t],
+    [
+      form,
+      router,
+      searchParams,
+      setIsAdmin,
+      setIsLogin,
+      setUserInfo,
+      setIsCounselor,
+      setIsProfessor,
+      t,
+    ],
   );
 
   const onChange = useCallback((e) => {
