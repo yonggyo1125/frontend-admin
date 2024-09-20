@@ -1,9 +1,9 @@
 import UpdateContainer from '@/board/containers/UpdateContainer';
 import AdminOnlyContainer from '@/member/containers/AdminOnlyContainer';
-const BoardRegisterPage = () => {
+const BoardRegisterPage = ({ params }) => {
   return (
     <AdminOnlyContainer>
-      <UpdateContainer />
+      <UpdateContainer params={params} />
     </AdminOnlyContainer>
   );
 };

@@ -46,7 +46,7 @@ const MainMenu = () => {
           href="/board/list"
           className={classNames({ on: menuCode === 'board' })}
         >
-          {t('게시판목록')}
+          {t('게시판관리')}
         </a>
         <a
           href="/counseling"
