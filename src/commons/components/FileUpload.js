@@ -70,7 +70,7 @@ const FileUpload = ({
         (async () => {
           try {
             const res = await apiRequest('/file/upload', 'POST', formData);
-            console.log('res', res);
+
             if (res.status === 201 && res.data.success) {
               // 파일 업로드 후속 처리
               if (typeof callback === 'function') {

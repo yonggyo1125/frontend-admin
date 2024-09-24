@@ -104,7 +104,7 @@ const GroupUpdateContainer = ({ params }) => {
         }
       })();
     },
-    [form, cNo, t],
+    [form, cNo, router, t],
   );
 
   const onFileDelete = useCallback(

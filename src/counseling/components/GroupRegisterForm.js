@@ -230,7 +230,7 @@ const GroupRegisterForm = ({
         <dt>{t('상담일시')}</dt>
         <dd>
           <StyledInput
-            type="date"
+            type="text"
             name="counselingDate"
             value={form?.counselingDate ?? ''}
             onChange={onChange}
