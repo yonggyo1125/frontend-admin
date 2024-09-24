@@ -53,10 +53,20 @@ const GroupRegisterForm = ({ form, errors, onChange, onSubmit }) => {
   const [editor, setEditor] = useState(null);
 
   const insertImageCallback = useCallback(
-    (url) => {
-      editor.execute('insertImage', { source: url });
+    (files) => {
+      if (!files || files.length === 0) {
+        return;
+      }
+
+      const source = files.map((file) => file.fileUrl);
+
+      editor.execute('insertImage', { source });
+
+      const editorImages = form?.editorImages ?? [];
+      editorImages.push(...files);
+      onChange({ target: { name: 'editorImages', value: editorImages } });
     },
-    [editor],
+    [editor, form, onChange],
   );
 
   return (
