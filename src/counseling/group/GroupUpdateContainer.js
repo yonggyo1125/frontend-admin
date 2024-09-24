@@ -26,6 +26,7 @@ const GroupUpdateContainer = ({ params }) => {
 
   const [form, setForm] = useState({
     gid: '' + Date.now(),
+    counselingLimit: 1,
   });
   const [errors, setErrors] = useState({});
   const [counselors, setCounselors] = useState([]);
@@ -106,6 +107,15 @@ const GroupUpdateContainer = ({ params }) => {
     [form, t],
   );
 
+  const onClick = useCallback((counselor) => {
+    setForm((form) => ({
+      ...form,
+      counselorName: counselor.userName,
+      counselorEmail: counselor.email,
+      counselor,
+    }));
+  }, []);
+
   return (
     <GroupRegisterForm
       form={form}
@@ -114,6 +124,7 @@ const GroupUpdateContainer = ({ params }) => {
       onSubmit={onSubmit}
       onFileDelete={onFileDelete}
       counselors={counselors}
+      onClick={onClick}
     />
   );
 };
