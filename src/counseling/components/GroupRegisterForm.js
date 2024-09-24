@@ -49,7 +49,13 @@ const FormBox = styled.form`
   }
 `;
 
-const GroupRegisterForm = ({ form, errors, onChange, onSubmit }) => {
+const GroupRegisterForm = ({
+  form,
+  errors,
+  onChange,
+  onSubmit,
+  onFileDelete,
+}) => {
   const { t } = useTranslation();
   const [editor, setEditor] = useState(null);
 
@@ -130,7 +136,9 @@ const GroupRegisterForm = ({ form, errors, onChange, onSubmit }) => {
           >
             {t('이미지_첨부')}
           </FileUpload>
-          {form?.editorImages && <FileItems files={form.editorImages} />}
+          {form?.editorImages && (
+            <FileItems files={form.editorImages} onDelete={onFileDelete} />
+          )}
         </dd>
       </dl>
 
