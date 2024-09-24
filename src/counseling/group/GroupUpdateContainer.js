@@ -60,23 +60,30 @@ const GroupUpdateContainer = ({ params }) => {
     [form, t],
   );
 
-  const onFileDelete = useCallback((seq) => {
-    (async () => {
-      try {
-        await deleteFile(seq);
-
-        let editorImages = form?.editorImages;
-        if (!editorImages) {
-          return;
-        }
-
-        editorImages = editorImages.filter((file) => file.seq !== seq);
-        setForm((form) => ({ ...form, editorImages }));
-      } catch (err) {
-        console.error(err);
+  const onFileDelete = useCallback(
+    (seq) => {
+      if (!confirm(t('정말_삭제하겠습니까?'))) {
+        return;
       }
-    })();
-  }, []);
+
+      (async () => {
+        try {
+          await deleteFile(seq);
+
+          let editorImages = form?.editorImages;
+          if (!editorImages) {
+            return;
+          }
+
+          editorImages = editorImages.filter((file) => file.seq !== seq);
+          setForm((form) => ({ ...form, editorImages }));
+        } catch (err) {
+          console.error(err);
+        }
+      })();
+    },
+    [form],
+  );
 
   return (
     <GroupRegisterForm
