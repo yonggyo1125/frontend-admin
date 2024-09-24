@@ -5,6 +5,7 @@ import { StyledInput } from '@/commons/components/inputs/StyledInput';
 import { StyledButton } from '@/commons/components/buttons/StyledButton';
 import { useTranslation } from 'react-i18next';
 import FileUpload from '@/commons/components/FileUpload';
+import FileItems from '@/commons/components/FileItems';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import {
   ClassicEditor,
@@ -129,6 +130,7 @@ const GroupRegisterForm = ({ form, errors, onChange, onSubmit }) => {
           >
             {t('이미지_첨부')}
           </FileUpload>
+          {form?.editorImages && <FileItems files={form.editorImages} />}
         </dd>
       </dl>
 
