@@ -49,10 +49,16 @@ const MainMenu = () => {
           {t('게시판관리')}
         </a>
         <a
-          href="/counseling"
+          href="/counseling/group"
           className={classNames({ on: menuCode === 'counseling' })}
         >
-          {t('상담관리')}
+          {t('집단상담 관리')}
+        </a>
+        <a
+          href="/counseling/details"
+          className={classNames({ on: menuCode === 'application' })}
+        >
+          {t('상담이력 관리')}
         </a>
       </Menus>
     )

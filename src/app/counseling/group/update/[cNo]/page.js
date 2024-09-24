@@ -1,5 +1,5 @@
 import AdminOnlyContainer from '@/member/containers/AdminOnlyContainer';
-import GroupUpdateContainer from '@/counseling/containers/GroupUpdateContainer';
+import GroupUpdateContainer from '@/counseling/group/GroupUpdateContainer';
 
 const GroupUpdatePage = ({ params }) => {
   return (

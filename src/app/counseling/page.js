@@ -1,5 +1,5 @@
 import AdminOnlyContainer from '@/member/containers/AdminOnlyContainer';
-import ApplicationListContainer from '@/counseling/containers/ApplicationListContainer';
+import ApplicationListContainer from '@/counseling/details/ApplicationListContainer';
 
 const counselingPage = ({ searchParams }) => {
   return (

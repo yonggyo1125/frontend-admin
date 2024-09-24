@@ -7,7 +7,6 @@ const FormBox = styled.form``;
 
 const BoardForm = ({ form, errors, onSubmit, onChange, onToggle }) => {
   const { t } = useTranslation();
-
   return (
     <FormBox onSubmit={onSubmit} autoComplete="off">
       <dl>

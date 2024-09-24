@@ -1,10 +1,10 @@
 import AdminOnlyContainer from '@/member/containers/AdminOnlyContainer';
-import GroupListContainer from '@/counseling/containers/GroupListContainer';
+import GroupUpdateContainer from '@/counseling/group/GroupUpdateContainer';
 
-const GroupRegisterPage = ({ searchParams }) => {
+const GroupRegisterPage = ({ params }) => {
   return (
     <AdminOnlyContainer>
-      <GroupListContainer searchParams={searchParams} />
+      <GroupUpdateContainer params={params} />
     </AdminOnlyContainer>
   );
 };

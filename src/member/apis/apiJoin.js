@@ -8,7 +8,6 @@ export const apiJoin = (form) =>
 
     apiRequest('/member/account', 'POST', form)
       .then((res) => {
-        console.log('res', res);
         if (res.status !== 201) {
           // 검증 실패
           reject(res.data);
