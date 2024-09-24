@@ -10,7 +10,7 @@ const FileItem = styled.li``;
  * seq
  * downloadUrl
  */
-const FileItems = ({ files, className }) => {
+const FileItems = ({ files, className, onDelete }) => {
   return (
     files &&
     files.length > 0 && (
@@ -19,6 +19,7 @@ const FileItems = ({ files, className }) => {
           <FileItem key={`file_${seq}`}>
             <FaFile />
             <a href={downloadUrl}>{fileName}</a>
+            <FaRegWindowClose onClick={() => onDelete(seq)} />
           </FileItem>
         ))}
       </ul>
