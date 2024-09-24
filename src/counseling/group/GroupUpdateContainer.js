@@ -5,16 +5,23 @@ import React, {
   useState,
   useCallback,
 } from 'react';
+import { useRouter } from 'next/navigation';
 import { getCommonActions } from '@/commons/contexts/CommonContext';
 import { useTranslation } from 'react-i18next';
 import GroupRegisterForm from '../components/GroupRegisterForm';
 import { deleteFile } from '@/commons/libs/apiFile';
-import { getCounselors } from '../apis/apiCounseling';
+import {
+  getCounselors,
+  registerGroupProgram,
+  updateGroupProgram,
+} from '../apis/apiCounseling';
 
 const GroupUpdateContainer = ({ params }) => {
   const { setMenuCode, setSubMenuCode, setMainTitle } = getCommonActions();
   const { cNo } = params;
   const { t } = useTranslation();
+
+  const router = useRouter();
 
   useLayoutEffect(() => {
     setMenuCode('counseling');
@@ -25,6 +32,7 @@ const GroupUpdateContainer = ({ params }) => {
   }, [setMenuCode, setSubMenuCode, cNo, setMainTitle, t]);
 
   const [form, setForm] = useState({
+    cNo,
     gid: '' + Date.now(),
     counselingLimit: 1,
   });
@@ -74,12 +82,29 @@ const GroupUpdateContainer = ({ params }) => {
         }
       }
 
+      setErrors(_errors);
       if (hasErrors) {
-        setErrors(_errors);
         return;
       }
+
+      // 추가, 수정 처리
+      (async () => {
+        try {
+          cNo
+            ? await updateGroupProgram(form)
+            : await registerGroupProgram(form);
+
+          router.replace('/counseling/group');
+        } catch (err) {
+          const message = err.message;
+          setErrors(
+            typeof message === 'string' ? { global: [message] } : message,
+          );
+          console.error(err);
+        }
+      })();
     },
-    [form, t],
+    [form, cNo, t],
   );
 
   const onFileDelete = useCallback(
