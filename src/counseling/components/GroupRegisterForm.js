@@ -55,6 +55,7 @@ const GroupRegisterForm = ({
   onChange,
   onSubmit,
   onFileDelete,
+  counselors,
 }) => {
   const { t } = useTranslation();
   const [editor, setEditor] = useState(null);
@@ -78,24 +79,19 @@ const GroupRegisterForm = ({
 
   return (
     <FormBox autoComplete="off" onSubmit={onSubmit}>
-      <dl>
-        <dt>{t('집단상담 프로그램번호')}</dt>
-        <dd>
-          <StyledInput
-            type="text"
-            name="gno"
-            value={form?.gno}
-            onChange={onChange}
-          />
-        </dd>
-      </dl>
+      {form?.cNo && (
+        <dl>
+          <dt>{t('집단상담 프로그램번호')}</dt>
+          <dd>{form.cNo}</dd>
+        </dl>
+      )}
       <dl>
         <dt>{t('집단상담 프로그램명')}</dt>
         <dd>
           <StyledInput
             type="text"
-            name="gname"
-            value={form?.gname}
+            name="counselingName"
+            value={form?.counselingName ?? ''}
             onChange={onChange}
           />
         </dd>
@@ -120,11 +116,11 @@ const GroupRegisterForm = ({
                 ImageInsert,
               ],
             }}
-            data={form?.gdes || ''}
+            data={form?.counselingDes ?? ''}
             onReady={(editor) => setEditor(editor)}
             onChange={(_, editor) => {
               onChange({
-                target: { name: 'gdes', value: editor.getData() },
+                target: { name: 'counselingDes', value: editor.getData() },
               });
             }}
           />
@@ -141,15 +137,16 @@ const GroupRegisterForm = ({
           )}
         </dd>
       </dl>
-
+      
+      
       <dl>
         <dt>{t('상담사명')}</dt>
         <dd>
           <StyledInput
             type="text"
-            name="cname"
-            value={form?.cname}
-            onChange={onChange}
+            name="counselorName"
+            value={form?.counselorName ?? ''}
+            readOnly
           />
         </dd>
       </dl>
@@ -158,9 +155,9 @@ const GroupRegisterForm = ({
         <dd>
           <StyledInput
             type="text"
-            name="cemail"
-            value={form?.cemail}
-            onChange={onChange}
+            name="counselorEmail"
+            value={form?.counselorEmail ?? ''}
+            readOnly
           />
         </dd>
       </dl>
@@ -169,8 +166,8 @@ const GroupRegisterForm = ({
         <dd>
           <StyledInput
             type="date"
-            name="sdate"
-            value={form?.sdate}
+            name="reservationSdate"
+            value={form?.reservationSdate ?? ''}
             onChange={onChange}
           />
         </dd>
@@ -180,8 +177,8 @@ const GroupRegisterForm = ({
         <dd>
           <StyledInput
             type="date"
-            name="edate"
-            value={form?.edate}
+            name="reservationSdate"
+            value={form?.reservationSdate ?? ''}
             onChange={onChange}
           />
         </dd>
@@ -191,8 +188,8 @@ const GroupRegisterForm = ({
         <dd>
           <StyledInput
             type="text"
-            name="date"
-            value={form.date}
+            name="counselingDate"
+            value={form?.counselingDate ?? ''}
             onChange={onChange}
           />
         </dd>
@@ -202,7 +199,7 @@ const GroupRegisterForm = ({
         <dd>
           <StyledInput
             type="text"
-            name="peopleCount" // 이름 지정
+            name="counselingLimit" // 이름 지정
             onChange={onChange}
           />
         </dd>

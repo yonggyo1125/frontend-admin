@@ -9,6 +9,7 @@ import { getCommonActions } from '@/commons/contexts/CommonContext';
 import { useTranslation } from 'react-i18next';
 import GroupRegisterForm from '../components/GroupRegisterForm';
 import { deleteFile } from '@/commons/libs/apiFile';
+import { getCounselors } from '../apis/apiCounseling';
 
 const GroupUpdateContainer = ({ params }) => {
   const { setMenuCode, setSubMenuCode, setMainTitle } = getCommonActions();
@@ -27,9 +28,28 @@ const GroupUpdateContainer = ({ params }) => {
     gid: '' + Date.now(),
   });
   const [errors, setErrors] = useState({});
+  const [counselors, setCounselors] = useState([]);
+  const [skey, setSkey] = useState('');
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const counselors = await getCounselors(skey);
+        setCounselors(counselors);
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, [skey]);
 
   const onChange = useCallback((e) => {
-    setForm((form) => ({ ...form, [e.target.name]: e.target.value }));
+    const name = e.target.name;
+    const value = e.target.value;
+    if (name === 'skey') {
+      setSkey(value);
+    } else {
+      setForm((form) => ({ ...form, [name]: value }));
+    }
   }, []);
 
   const onSubmit = useCallback(
@@ -38,9 +58,10 @@ const GroupUpdateContainer = ({ params }) => {
 
       // 유효성 검사
       const requiredFields = {
-        gno: t('프로그램_번호를_입력하세요'),
-        gname: t('프로그램명을_입력해주세요'),
-        gdes: t('설명을_입력하세요'),
+        counselingName: t('프로그램명을_입력해주세요.'),
+        counselingDes: t('설명을_입력하세요.'),
+        counselorName: t('상담사를_선택하세요.'),
+        counselorEmail: t('상담사를_선택하세요.'),
       };
       const _errors = {};
       let hasErrors = false;
@@ -82,7 +103,7 @@ const GroupUpdateContainer = ({ params }) => {
         }
       })();
     },
-    [form],
+    [form, t],
   );
 
   return (
@@ -92,6 +113,7 @@ const GroupUpdateContainer = ({ params }) => {
       onChange={onChange}
       onSubmit={onSubmit}
       onFileDelete={onFileDelete}
+      counselors={counselors}
     />
   );
 };
